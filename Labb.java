@@ -1,19 +1,14 @@
 import java.util.Scanner;
 
-public class Labb {
-    CrewMembers[] crewMembers = {new Mechanic(), new Scout(), new Scientist()};
-
-    SpaceStation spaceStation = new SpaceStation();
-
+public class Labb extends Rooms {
     boolean isOnFire = true;
 
-    Scanner input = new Scanner(System.in);
-    int choice = input.nextInt();
-
+    @Override 
     void enter() {
-        System.out.println("Ni har kommit till labbet och ni märker av att det finns en eld som är ganska intensiv och om den inte släks så kommer all syre att ta slut.");
+        System.out.println("""
+            Ni har kommit till labbet och ni märker av att det finns en eld som är ganska intensiv och om den inte släks så kommer all syre att ta slut.
+        """);
 
-        int crewIndex = -1;
         while (crewIndex < 0 || crewIndex > 2) {
             System.out.println("Välj vem som ska lösa problemet i detta rummet. \n1. Mechanic \n2. Scout \n3. Scientist");
             switch (input.nextInt()) {
@@ -49,10 +44,12 @@ public class Labb {
 
             if (option == 1) {
                 System.out.println("Du försökte använda brandsläkaren men det gjorde så att elden exploderade och att alla av er dog! \nGAME OVER");
+                spaceStation.gameOver = true;
                 break;
             }
             else if (option == 2) {
                 System.out.println("Du försökte kväva elden med en eld filt men det gjorde bara elden starkare vilket gjorde att syret gick helt och hållet bort och att ni kvädes av syrebristen och koldioxiden! \nGAME OVER");
+                spaceStation.gameOver = true;
                 break;
             }
             else if (option == 3 && crewIndex == 2) {
@@ -76,24 +73,29 @@ public class Labb {
                         case MAGNESIUM: 
                                 System.out.println("Du tog MAGNESIUM och kasstade över elden detta gjorde elden starkare och dra mer syre, försök igen");
                                 spaceStation.oxygenBurnPerTurn(30);
+                                spaceStation.heatRisePerTurn();
+                                System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                             break;
     
                         case POTASSIUM:
                                 System.out.println("Du tog POTASSIUM och kasstade över elden detta gjorde elden starkare och dra mer syre, försök igen");
                                 spaceStation.oxygenBurnPerTurn(30);
-                                System.out.println(spaceStation.oxygenLevel);
+                                spaceStation.heatRisePerTurn();
+                                System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                             break;
     
                         case TITANIUM:
                                 System.out.println("Du tog TITANIUM och kasstade över elden detta gjorde elden starkare och dra mer syre, försök igen");
                                 spaceStation.oxygenBurnPerTurn(30);
-                                System.out.println(spaceStation.oxygenLevel);
+                                spaceStation.heatRisePerTurn();
+                                System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                             break;
                     
                         default:
                                 System.out.println("Det är inget alternativ försök igen");
                                 spaceStation.oxygenBurnPerTurn(20);
-                                System.out.println(spaceStation.oxygenLevel);
+                                spaceStation.heatRisePerTurn();
+                                System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                             break;
                     }
                 } catch (IllegalArgumentException e) {
@@ -105,19 +107,23 @@ public class Labb {
             }
         }
 
-        // behövs sättas i en while om spelet inte blir GAME OVER!
-        System.out.println("Elden har sloknat och syre nivån är stabil, det finns fortfarande kemikalier på golvet skulle du vilja tårka upp det? (ja/ nej)");
+        if (spaceStation.gameOver == false) {
+            System.out.println("Elden har sloknat och syre nivån är stabil, det finns fortfarande kemikalier på golvet skulle du vilja tårka upp det? (ja/ nej)");
 
-        String yesorNo = input.next().toLowerCase();
+            String yesorNo = input.next().toLowerCase();
 
-        if (yesorNo.equals("ja")) {
-            System.out.println("Du städar upp kemikalierna");
+            if (yesorNo.equals("ja")) {
+                System.out.println("Du städar upp kemikalierna");
+                spaceStation.heatRisePerTurn();
+                System.out.println("värm ökas till " + spaceStation.getReactorHeat());
+            }
+            else if (yesorNo.equals("nej")) {
+                System.out.println("Du städade inte upp kemiklierna och detta kan ha konsikvenser senare");
+            }
+            else {
+                System.out.println("Du har valt ett icke valbart alternativ");
+            }
         }
-        else if (yesorNo.equals("nej")) {
-            System.out.println("Du städade inte upp kemiklierna och detta kan ha konsikvenser senare");
-        }
-        else {
-            System.out.println("Du har valt ett icke valbart alternativ");
-        }
+        
     }
 }

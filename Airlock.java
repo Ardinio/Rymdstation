@@ -1,21 +1,14 @@
 import java.util.Scanner;
 
-public class Airlock {
-    CrewMembers[] crewMembers = {new Mechanic(), new Scout(), new Scientist()};
-
-    SpaceStation spaceStation = new SpaceStation();
-
+public class Airlock extends Rooms{
     boolean breach = true;
 
-    Scanner input = new Scanner(System.in);
-    int choice = input.nextInt();
-
-
     void enter() {
-        System.out.println("Ni kommer till luftslussen och märker att den läcker syre genom ett håll i sidan. Dörren in till resten av rymdstationen är låst fram tills skadan är lagad. \nFör att laga hållet och ");
+        System.out.println("""
+            Ni kommer till luftslussen och märker att den läcker syre genom ett håll i sidan. Dörren in till resten av rymdstationen är låst fram tills skadan är lagad. \n    För att laga hållet och 
+        """);
         
         // S
-        int crewIndex = -1;
         while (crewIndex < 0 || crewIndex > 2) {
             System.out.println("Välj vem som ska lösa problemet i detta rummet. \n1. Mechanic \n2. Scout \n3. Scientist");
             switch (input.nextInt()) {
@@ -38,33 +31,36 @@ public class Airlock {
         }
 
         while (breach == true) { 
-            System.out.print(crewIndex + " är utanför skeppet, ska hen gå höger eller vänster? (H/V) "); 
+            System.out.print(crewMembers[crewIndex].role + " är utanför skeppet, ska hen gå höger eller vänster? (H/V) "); 
             String direction = input.nextLine();
             if (direction.equalsIgnoreCase("H")) {
 
-                System.out.println(crewIndex + " går höger och ser läckan högt upp. Ska hen hoppa eller klättra upp? (H/K) ");
+                System.out.println(crewMembers[crewIndex].role + " går höger och ser läckan högt upp. Ska hen hoppa eller klättra upp? (H/K) ");
                 String action = input.nextLine();
 
                 if (action.equalsIgnoreCase("H")) {
-                    System.out.println(crewIndex + " hoppar upp och landar smidigt för att laga läckan.");
+                    System.out.println(crewMembers[crewIndex].role + " hoppar upp och landar smidigt för att laga läckan.");
                     spaceStation.oxygenBurnPerTurn(10);
+                    spaceStation.heatRisePerTurn();
+                    System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                 breach = false;
                 }
 
                 else if (action.equalsIgnoreCase("K")) {
-                    System.out.println(crewIndex + " klättrar upp, det tar lite längre tid men hen lyckas laga läckan.");
+                    System.out.println(crewMembers[crewIndex].role + " klättrar upp, det tar lite längre tid men hen lyckas laga läckan.");
                     spaceStation.oxygenBurnPerTurn(20);
+                    spaceStation.heatRisePerTurn();
+                    System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                 breach = false;
                 }
             } 
 
             else if (direction.equalsIgnoreCase("V")) {
-                System.out.println(crewIndex + " går vänster och ser inte läckan. Hen går tillbaka till mitten och sedan åt höger. och börjar klättra upp. \n Det tar lite längre tid men hen lyckas laga läckan.");
+                System.out.println(crewMembers[crewIndex].role + " går vänster och ser inte läckan. Hen går tillbaka till mitten och sedan åt höger. och börjar klättra upp. \n Det tar lite längre tid men hen lyckas laga läckan.");
                 spaceStation.oxygenBurnPerTurn(30);
+                spaceStation.heatRisePerTurn();
+                System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
             } 
-            
-        
-            
         }
     }
     

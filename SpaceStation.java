@@ -4,6 +4,7 @@ public class SpaceStation {
     public int reactorHeat = 0;
     public int oxygenLevel = 100;
     public int turn = 0;
+    public boolean gameOver = false;
 
     enum Rooms {
         START,
@@ -26,6 +27,7 @@ public class SpaceStation {
             reactorHeat += 5;
         else
             System.out.println("Gruppen har dött för att det blev för varmt :/ better luck next time");
+            gameOver = true;
     }
 
     void oxygenBurnPerTurn(int oxygenBurnRate) {
@@ -33,6 +35,7 @@ public class SpaceStation {
             oxygenLevel -= oxygenBurnRate;
         else
             System.out.println("Gruppen har dött för att det blev för lite syre :/ better luck next time");
+            gameOver = true;
     }
 
 }
