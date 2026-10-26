@@ -15,12 +15,15 @@ public class Reactor extends Rooms implements CooldownRods{
             System.out.println("""
                 När ni står och läser på panelen för att förstå vilken spak som gör vad så kommer en figur fram bakom ett hörn.
                 Han verkar lika förvånad som ni att stöta på er här och ser ut att få smått panik. När han inser att ni är där för att försöka kyla ner reaktorn så blir han istället arg.
-                    "Jag är Markiplier"
+                    "Jag är Markiplier."
                     "Vilka är ni? Vad gör ni här? Ni får inte stoppa min plan att spränga upp reaktorn genom att överhetta reaktorn och starta en brand i labbet för att täcka upp det!"
                 Han går till attack för att stoppa er från att lista ut hur ni ska stoppa reaktorn.
             """);
 
-            System.out.println("Hur vill du försöka stoppa Markiplier \n1. Alla hoppar på honom och s");
+            System.out.println("Hur vill du försöka stoppa Markiplier \n1. Alla hoppar på honom och håller honom nere \n2. Charisma check");
+            if (input.nextInt() == 1) {
+                System.out.println("Ni brottar ner honom och går vidare för att kolla på panelen igen");
+            }
         } 
 
         cooldownReactor(crewIndex);
