@@ -23,19 +23,23 @@ public class SpaceStation {
 
     // Värmen i reaktorn höjs varje turn
     void heatRisePerTurn() {
-        if (reactorHeat <= 100)
+        if (reactorHeat < 100) {
             reactorHeat += 5;
-        else
+        }
+        else {
             System.out.println("Gruppen har dött för att det blev för varmt :/ better luck next time");
             gameOver = true;
+        }
     }
 
     void oxygenBurnPerTurn(int oxygenBurnRate) {
-        if (oxygenLevel >= 0)
+        if (oxygenLevel > 0) {
             oxygenLevel -= oxygenBurnRate;
-        else
+        }
+        else {
             System.out.println("Gruppen har dött för att det blev för lite syre :/ better luck next time");
             gameOver = true;
+        }
     }
 
 }

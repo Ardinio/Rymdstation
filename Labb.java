@@ -5,6 +5,7 @@ public class Labb extends Rooms {
 
     @Override 
     void enter() {
+        crewIndex = -1;
         System.out.println("""
             Ni har kommit till labbet och ni märker av att det finns en eld som är ganska intensiv och om den inte släks så kommer all syre att ta slut.
         """);
@@ -54,6 +55,9 @@ public class Labb extends Rooms {
             }
             else if (option == 3 && crewIndex == 2) {
                 System.out.println(crewMembers[crewIndex].role + " kolla på kemikale hyllan och ser 4 kemikalier dessa är: ");
+                spaceStation.oxygenBurnPerTurn(30);
+                spaceStation.heatRisePerTurn();
+                System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                 for (Chemicals chemicals : Chemicals.values()) {
                     System.out.print(chemicals + " ");
                 }
@@ -74,32 +78,35 @@ public class Labb extends Rooms {
                                 System.out.println("Du tog MAGNESIUM och kasstade över elden detta gjorde elden starkare och dra mer syre, försök igen");
                                 spaceStation.oxygenBurnPerTurn(30);
                                 spaceStation.heatRisePerTurn();
-                                System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
+                                System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                             break;
     
                         case POTASSIUM:
                                 System.out.println("Du tog POTASSIUM och kasstade över elden detta gjorde elden starkare och dra mer syre, försök igen");
                                 spaceStation.oxygenBurnPerTurn(30);
                                 spaceStation.heatRisePerTurn();
-                                System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
+                                System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                             break;
     
                         case TITANIUM:
                                 System.out.println("Du tog TITANIUM och kasstade över elden detta gjorde elden starkare och dra mer syre, försök igen");
                                 spaceStation.oxygenBurnPerTurn(30);
                                 spaceStation.heatRisePerTurn();
-                                System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
+                                System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                             break;
                     
                         default:
                                 System.out.println("Det är inget alternativ försök igen");
                                 spaceStation.oxygenBurnPerTurn(20);
                                 spaceStation.heatRisePerTurn();
-                                System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
+                                System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                             break;
                     }
                 } catch (IllegalArgumentException e) {
                     System.out.println("Detta är ingen av alternativen");
+                    spaceStation.oxygenBurnPerTurn(20);
+                    spaceStation.heatRisePerTurn();
+                    System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                 }
             }
             else {

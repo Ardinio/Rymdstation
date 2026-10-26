@@ -4,6 +4,7 @@ public class Airlock extends Rooms{
     boolean breach = true;
 
     void enter() {
+        crewIndex = -1;
         System.out.println("""
             Ni kommer till luftslussen och märker att den läcker syre genom ett håll i sidan. Dörren in till resten av rymdstationen är låst fram tills skadan är lagad. \n    För att laga hållet och 
         """);
@@ -31,35 +32,42 @@ public class Airlock extends Rooms{
         }
 
         while (breach == true) { 
-            System.out.print(crewMembers[crewIndex].role + " är utanför skeppet, ska hen gå höger eller vänster? (H/V) "); 
-            String direction = input.nextLine();
-            if (direction.equalsIgnoreCase("H")) {
+            System.out.print(crewMembers[crewIndex].role + " är utanför skeppet, ska hen gå höger eller vänster? (H/V) ");
+            spaceStation.oxygenBurnPerTurn(10);
+            spaceStation.heatRisePerTurn();
+            System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
 
+            if (input.next().toUpperCase().equals("H")) {
                 System.out.println(crewMembers[crewIndex].role + " går höger och ser läckan högt upp. Ska hen hoppa eller klättra upp? (H/K) ");
-                String action = input.nextLine();
+                spaceStation.oxygenBurnPerTurn(10);
+                spaceStation.heatRisePerTurn();
+                System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
 
-                if (action.equalsIgnoreCase("H")) {
+                if (input.next().equalsIgnoreCase("H")) {
                     System.out.println(crewMembers[crewIndex].role + " hoppar upp och landar smidigt för att laga läckan.");
                     spaceStation.oxygenBurnPerTurn(10);
                     spaceStation.heatRisePerTurn();
-                    System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
+                    System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                 breach = false;
                 }
 
-                else if (action.equalsIgnoreCase("K")) {
+                else if (input.next().equalsIgnoreCase("K")) {
                     System.out.println(crewMembers[crewIndex].role + " klättrar upp, det tar lite längre tid men hen lyckas laga läckan.");
                     spaceStation.oxygenBurnPerTurn(20);
                     spaceStation.heatRisePerTurn();
-                    System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
+                    spaceStation.heatRisePerTurn();
+                    System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                 breach = false;
                 }
             } 
 
-            else if (direction.equalsIgnoreCase("V")) {
+            else if (input.next().toUpperCase().equals("V")) {
                 System.out.println(crewMembers[crewIndex].role + " går vänster och ser inte läckan. Hen går tillbaka till mitten och sedan åt höger. och börjar klättra upp. \n Det tar lite längre tid men hen lyckas laga läckan.");
                 spaceStation.oxygenBurnPerTurn(30);
                 spaceStation.heatRisePerTurn();
-                System.out.println("Srye nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
+                spaceStation.heatRisePerTurn();
+                spaceStation.heatRisePerTurn();
+                System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
             } 
         }
     }
