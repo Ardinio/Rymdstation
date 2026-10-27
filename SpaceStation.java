@@ -1,8 +1,8 @@
 public class SpaceStation {
     // Klassen används i princip enbart som en timer för att hålla koll på oxygen och heat i backgrunden, ska inte göra något.
 
-    public int reactorHeat = 0;
-    public int oxygenLevel = 100;
+    static public int reactorHeat = 0;
+    static public int oxygenLevel = 100;
     public int turn = 0;
     public boolean gameOver = false;
 
