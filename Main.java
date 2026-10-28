@@ -33,7 +33,7 @@ public class Main {
 
             //System.out.println("Ni har nu lyckats stänga av reaktorn och räddat rymdstationen. \nNi har nu räddat jorden och kan återvända hem som hjältar.");
         
-            System.out.println("Vill du start om? Ja/Nej");
+            System.out.println("\nVill du start om? Ja/Nej");
             Scanner input = new Scanner(System.in);
             String yesOrNo = input.next().toLowerCase();
             if (yesOrNo.equals("nej")) {
@@ -41,7 +41,7 @@ public class Main {
                 break;
             }
             else {
-                System.out.println("Du skrev inte nej, då så spelet börjar om.");
+                System.out.println("Du skrev inte nej, då så spelet börjar om.\n");
             }
         }
     }

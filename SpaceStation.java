@@ -24,7 +24,7 @@ public class SpaceStation {
     // Värmen i reaktorn höjs varje turn
     void heatRisePerTurn() {
         if (reactorHeat < 100) {
-            reactorHeat += 5;
+            reactorHeat += 10;
         }
         else {
             System.out.println("Gruppen har dött för att det blev för varmt :/ better luck next time");
