@@ -6,6 +6,7 @@ public class Main {
         while (true) {
 
             Rooms[] rooms = {new Airlock(), new Labb(), new Reactor()};
+
             //Print intro
             System.out.println("""
                 Ni har fått in ett nödanrop till en rymdstation i galaxen som behöver eran hjälp.
@@ -14,6 +15,10 @@ public class Main {
             """);
 
             for(int i = 0; i < 3; i++) {
+                if (rooms[i] == rooms[0]) {
+                    rooms[i].spaceStation.oxygenLevel = 100;
+                    rooms[i].spaceStation.reactorHeat = 0;
+                }
                 rooms[i].spaceStation.gameOver = false;
                 rooms[i].enter();
             
