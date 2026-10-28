@@ -37,21 +37,22 @@ public class Airlock extends Rooms{
             spaceStation.heatRisePerTurn();
             System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
 
-            if (input.next().toUpperCase().equals("H")) {
+            String direction = input.next();
+            if (direction.equalsIgnoreCase("H")) {
                 System.out.println(crewMembers[crewIndex].role + " går höger och ser läckan högt upp. Ska hen hoppa eller klättra upp? (H/K) ");
                 spaceStation.oxygenBurnPerTurn(10);
                 spaceStation.heatRisePerTurn();
                 System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
 
-                if (input.next().equalsIgnoreCase("H")) {
+                String action = input.next();
+                if (action.equalsIgnoreCase("H")) {
                     System.out.println(crewMembers[crewIndex].role + " hoppar upp och landar smidigt för att laga läckan.");
                     spaceStation.oxygenBurnPerTurn(10);
                     spaceStation.heatRisePerTurn();
                     System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                 breach = false;
                 }
-
-                else if (input.next().equalsIgnoreCase("K")) {
+                else if (action.equalsIgnoreCase("K")) {
                     System.out.println(crewMembers[crewIndex].role + " klättrar upp, det tar lite längre tid men hen lyckas laga läckan.");
                     spaceStation.oxygenBurnPerTurn(20);
                     spaceStation.heatRisePerTurn();
@@ -59,9 +60,12 @@ public class Airlock extends Rooms{
                     System.out.println("Syre nivån går ner ni har: " + spaceStation.getOxygenLevel() + " syre kvar och värm ökas till " + spaceStation.getReactorHeat());
                 breach = false;
                 }
+                else {
+                    System.out.println("Det var inget alternativ");
+                }
             } 
 
-            else if (input.next().toUpperCase().equals("V")) {
+            else if (direction.equalsIgnoreCase("V")) {
                 System.out.println(crewMembers[crewIndex].role + " går vänster och ser inte läckan. Hen går tillbaka till mitten och sedan åt höger. och börjar klättra upp. \n Det tar lite längre tid men hen lyckas laga läckan.");
                 spaceStation.oxygenBurnPerTurn(30);
                 spaceStation.heatRisePerTurn();
